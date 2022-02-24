@@ -13,6 +13,7 @@ export const RemoveFromCart = (id) => {
 };
 
 export const ClearItems = () => {
+  //event
   return {
     type: "ClearItems",
     payload: [],
