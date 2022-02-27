@@ -35,6 +35,46 @@ export const CartService = {
 			};
 		}
 	},
+	SubtractToCart: (newCartItem, stateCartItems) => {
+		const existingCartItem = stateCartItems.find((x) => x.id == newCartItem.id);
+
+		// daha önceden sepete eklenmiş
+		if (existingCartItem.quantity > 1) {
+			if (existingCartItem != undefined) {
+				existingCartItem.quantity -= 1;
+
+				let _total = 0;
+
+				stateCartItems.forEach((cartItem) => {
+					_total += Number(cartItem.price) * Number(cartItem.quantity);
+				});
+
+				return {
+					cartItems: [...stateCartItems],
+					total: _total,
+				};
+
+
+			} else {
+				let newCartItems = [newCartItem, ...stateCartItems];
+
+				console.log('newCartItems', newCartItems);
+
+				let _total = 0;
+
+				newCartItems.forEach((cartItem) => {
+					_total += Number(cartItem.price) * Number(cartItem.quantity);
+				});
+
+				return {
+					cartItems: [...newCartItems],
+					total: _total,
+				};
+			}
+		}
+
+	},
+
 	RemoveFromCart: (id, stateCartItems) => {
 		const newCartItems = stateCartItems.filter((x) => x.id != id);
 
@@ -51,4 +91,5 @@ export const CartService = {
 			total: _total,
 		};
 	},
+
 };

@@ -1,4 +1,4 @@
-import {CartService} from "../../services/cart.service";
+import { CartService } from "../../services/cart.service";
 
 const CartState = {
   cartItems: [],
@@ -15,6 +15,7 @@ export const CartReducer = (state = CartState, action) => {
         action.payload,
         state.cartItems
       );
+
 
       return {
         ...state,
@@ -35,6 +36,19 @@ export const CartReducer = (state = CartState, action) => {
         cartItems: cartObject2.cartItems,
         total: cartObject2.total,
       };
+    case "SubtractToCart":
+      console.log("substract");
+      const cartObject3 = CartService.SubtractToCart(
+        action.payload,
+        state.cartItems
+      );
+
+
+      return {
+        ...state,
+        cartItems: cartObject3.cartItems,
+        total: cartObject3.total,
+      };
     case "ClearItems":
       return {
         ...state,
@@ -45,5 +59,7 @@ export const CartReducer = (state = CartState, action) => {
     default:
       console.log("default");
       return state;
-  }
+
+  };
+
 };

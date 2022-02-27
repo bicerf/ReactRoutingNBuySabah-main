@@ -19,3 +19,12 @@ export const ClearItems = () => {
     payload: [],
   };
 };
+export const SubtractToCart = (cartItem) => {
+  return {
+    type: "SubtractToCart",
+    payload: cartItem,
+  };
+};
+
+
+

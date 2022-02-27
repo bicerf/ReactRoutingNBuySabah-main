@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Button,
   ButtonGroup,
@@ -9,9 +9,9 @@ import {
   Offcanvas,
   Row,
 } from "react-bootstrap";
-import {useDispatch, useSelector} from "react-redux";
-import {ClearItems} from "../store/action/cart.action";
-function BasketModal({name, ...props}) {
+import { useDispatch, useSelector } from "react-redux";
+import { AddToCart, ClearItems, SubtractToCart } from "../store/action/cart.action";
+function BasketModal({ name, ...props }) {
   const cartTotal = useSelector((store) => store.cartState.total);
   const cartItem = useSelector((store) => store.cartState.cartItems);
   const dispatch = useDispatch();
@@ -20,6 +20,28 @@ function BasketModal({name, ...props}) {
     console.log("deneme", cartItem);
     dispatch(ClearItems());
   };
+  const addToCart = (item) => {
+		const cartItem = {
+			id: item.id,
+			name: item.Name,
+			price: item.Price,
+			quantity: 1,
+		};
+
+		dispatch(AddToCart(cartItem));
+	};
+  const subtractToCart = (item) => {
+		const cartItem = {
+			id: item.id,
+			name: item.Name,
+			price: item.Price,
+			quantity: 1,
+		};
+
+		dispatch(SubtractToCart(cartItem));
+	};
+  
+  
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -47,9 +69,9 @@ function BasketModal({name, ...props}) {
                     <Row>
                       <Col>{item.name}</Col>
                       <Col>
-                        <Button variant="secondary">-</Button>
+                        <Button onClick={() => subtractToCart(item)}  variant="secondary">-</Button>
                         <Button variant="secondary">{item.quantity}</Button>
-                        <Button variant="secondary">+</Button>
+                        <Button onClick={() => addToCart(item)} variant="secondary">+</Button>
 
                         <Button variant="secondary">x</Button>
                       </Col>

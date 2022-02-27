@@ -10,7 +10,7 @@ function Product() {
 	console.log('products', products);
 	const addToCart = (item) => {
 		const cartItem = {
-			id: item.ID,
+			id: item.id,
 			name: item.Name,
 			price: item.Price,
 			quantity: 1,
