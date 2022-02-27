@@ -10,7 +10,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { AddToCart, ClearItems, SubtractToCart } from "../store/action/cart.action";
+import { AddToCart, ClearItems, RemoveFromCart, SubtractToCart } from "../store/action/cart.action";
 function BasketModal({ name, ...props }) {
   const cartTotal = useSelector((store) => store.cartState.total);
   const cartItem = useSelector((store) => store.cartState.cartItems);
@@ -20,6 +20,15 @@ function BasketModal({ name, ...props }) {
     console.log("deneme", cartItem);
     dispatch(ClearItems());
   };
+  const remove = (item) => {
+		const itemId = {
+			id: item.id,
+
+		};
+    console.log("idne",itemId.id);
+		dispatch(RemoveFromCart(itemId.id));
+	};
+ 
   const addToCart = (item) => {
 		const cartItem = {
 			id: item.id,
@@ -73,7 +82,7 @@ function BasketModal({ name, ...props }) {
                         <Button variant="secondary">{item.quantity}</Button>
                         <Button onClick={() => addToCart(item)} variant="secondary">+</Button>
 
-                        <Button variant="secondary">x</Button>
+                        <Button  onClick={() => remove(item)}  variant="secondary">x</Button>
                       </Col>
                     </Row>
                   </Container>
