@@ -55,7 +55,8 @@ export const CartService = {
 				};
 
 
-			} else {
+			} 
+			else {
 				let newCartItems = [newCartItem, ...stateCartItems];
 
 				console.log('newCartItems', newCartItems);
